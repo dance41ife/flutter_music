@@ -44,7 +44,7 @@ class PlayingWidget extends StatelessWidget {
                   ),
                 ),
             ),
-            MusicPlayerContainer(),
+            MusicPlayerContainer(80,80),
           ],
         )
       ],

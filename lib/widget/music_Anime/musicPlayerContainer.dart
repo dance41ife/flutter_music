@@ -1,19 +1,31 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
+//  TODO
+//  picture size should be a parameter
 class MusicPlayerContainer extends StatefulWidget {
-  final MusicPlayerContainerState _musicPlayerContainerState =
-      MusicPlayerContainerState();
+
+
+  MusicPlayerContainer(this.imageWidth,this.imageHeight);
+
+  final double imageHeight;
+  final double imageWidth;
+
+   MusicPlayerContainerState _musicPlayerContainerState;
+
+
 
   void stopAnimation() {
     _musicPlayerContainerState.stopRotate();
   }
-  void startAnimation(){
+
+  void startAnimation() {
     _musicPlayerContainerState.startRotate();
   }
 
   @override
   State<StatefulWidget> createState() {
+    _musicPlayerContainerState = MusicPlayerContainerState(imageWidth,imageHeight);
     return _musicPlayerContainerState;
   }
 }
@@ -23,13 +35,19 @@ class MusicPlayerContainerState extends State<MusicPlayerContainer>
   Animation<double> _animation;
   AnimationController _animationController;
 
+  MusicPlayerContainerState(this.imageWidth, this.imageHeight);
+
+  final double imageHeight;
+  final double imageWidth;
+
   void stopRotate() {
     _animationController.stop();
   }
 
-  void startRotate(){
+  void startRotate() {
     _animationController.repeat();
   }
+
   @override
   void initState() {
     super.initState();
@@ -58,8 +76,8 @@ class MusicPlayerContainerState extends State<MusicPlayerContainer>
               new Transform.rotate(
                   angle: _animation.value,
                   child: new Container(
-                    height: 80,
-                    width: 80,
+                    height: this.imageHeight,
+                    width: this.imageWidth,
                     decoration: BoxDecoration(
                         color: Colors.white70,
                         image: DecorationImage(

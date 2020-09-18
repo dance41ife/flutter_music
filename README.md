@@ -1,16 +1,11 @@
 # flutter_shop
 
-A new Flutter application.
+一个简单的flutter播放器.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+完成内容:首页->详情页跳转
 
-A few resources to get you started if this is your first Flutter project:
+我目前发现的问题:详情页是一个listview 给他设了分割线，但是最后一行的分割线显示貌似有问题。
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+future:播放器播放音乐。

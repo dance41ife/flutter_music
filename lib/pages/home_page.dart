@@ -8,6 +8,7 @@ import '../widget/home/TopNavigator.dart';
 import 'dart:convert';
 import '../service/service_method.dart';
 import '../widget/music_Anime/musicPlayerContainer.dart';
+import '../widget/music/PlayWidget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,55 +23,65 @@ class _HomePageState extends State<HomePage> {
 
   OverlayEntry _createOverlayEntry() {
     return OverlayEntry(builder: (context) {
-      double screenHeight = MediaQuery
-          .of(context)
-          .size
-          .height;
-      double screenWeight = MediaQuery
-          .of(context)
-          .size
-          .width;
+      double screenHeight = MediaQuery.of(context).size.height;
+      double screenWeight = MediaQuery.of(context).size.width;
 
       return Positioned(
         left: 0,
         top: screenHeight - 50,
         child: Opacity(
-          opacity: 0.5,
+          opacity: 1,
           child: Container(
+              color: Colors.white,
               child: Container(
                 height: 50,
+                padding: EdgeInsets.only(top: 7,left: 7),
                 child: Row(
                   children: <Widget>[
                     Column(
-                      children: [
-                        _musicPlayerContainer
-                      ],
+                      children: [_musicPlayerContainer],
                     ),
-                    Column(
-                      children: [
-                        Row(
-                          children: <Widget>[
-                            Text('should be author',
-                                style: TextStyle(fontSize: 10)),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text('should be music name',
-                                style: TextStyle(fontSize: 10)),
-                          ],
-                        )
-                      ],
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              Text('should be music name',
+                                  style: TextStyle(fontSize: 15),),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 50,
-                            child: Icon(Icons.play_arrow, size: 18)
-                        )
-
-                      ],
-                    ),
+                    Container(
+                      padding :EdgeInsets.only(left: 30),
+                      child: Row(
+                        children: [
+                          Material(
+                            child: IconButton(
+                              icon: new Icon(
+                                Icons.skip_previous,
+                                size: 30,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Material(
+                              child: IconButton(
+                            icon: new Icon(Icons.play_arrow,
+                                size: 30, color: Colors.black),
+                            onPressed: () {},
+                          )),
+                          Material(
+                              child: IconButton(
+                            icon: new Icon(Icons.skip_next,
+                                size: 30, color: Colors.black),
+                            onPressed: () {},
+                          )),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               )),
@@ -103,10 +114,10 @@ class _HomePageState extends State<HomePage> {
               var data = json.decode(snapshot.data.toString());
               List swiper = data['msgValue']['swiperDataList'];
               List navigatorList =
-              (data['msgValue']['topNaviDataList'] as List).cast();
+                  (data['msgValue']['topNaviDataList'] as List).cast();
               String bannerPicUrl = (data['msgValue']['bannerPicUrl']);
               List myMusicList =
-              (data['msgValue']['myMusicList'] as List).cast();
+                  (data['msgValue']['myMusicList'] as List).cast();
               return Column(
                 children: <Widget>[
                   SwiperDiy(swiperDataList: swiper),
@@ -123,6 +134,6 @@ class _HomePageState extends State<HomePage> {
             }
           },
         ) //异步请求专用渲染组件
-    );
+        );
   }
 }

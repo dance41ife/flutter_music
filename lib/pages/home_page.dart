@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_shop/entities/MyMusicListItemData.dart';
 import 'package:flutter_shop/widget/home/SwiperDiy.dart';
+import 'package:flutter_shop/widget/music/song_list_item.dart';
+import 'package:flutter_shop/widget/music/user_grid_item.dart';
 import '../widget/home/HomeBanner.dart';
-import '../widget/home/HomeMyMusicList.dart';
-import '../widget/home/TopNavigator.dart';
 import 'dart:convert';
 import '../service/service_method.dart';
-import '../widget/music_Anime/musicPlayerContainer.dart';
-import '../widget/music/PlayWidget.dart';
+import '../widget/music_anime/musicPlayerContainer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,11 +18,13 @@ class _HomePageState extends State<HomePage> {
   OverlayEntry _overlayEntry;
   MusicPlayerContainer _musicPlayerContainer = new MusicPlayerContainer(20, 20);
 
+
+
   OverlayEntry _createOverlayEntry() {
     return OverlayEntry(builder: (context) {
+      bool isPlay = false;
       double screenHeight = MediaQuery.of(context).size.height;
-      double screenWeight = MediaQuery.of(context).size.width;
-
+      double screenWidth = MediaQuery.of(context).size.width;
       return Positioned(
         left: 0,
         top: screenHeight - 50,
@@ -35,7 +34,8 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
               child: Container(
                 height: 50,
-                padding: EdgeInsets.only(top: 7,left: 7),
+                width: screenWidth,
+                padding: EdgeInsets.only(top: 7, left: 7),
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -47,15 +47,17 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Row(
                             children: [
-                              Text('should be music name',
-                                  style: TextStyle(fontSize: 15),),
+                              Text(
+                                'should be music name',
+                                style: TextStyle(fontSize: 12),
+                              ),
                             ],
                           )
                         ],
                       ),
                     ),
                     Container(
-                      padding :EdgeInsets.only(left: 30),
+                      padding: EdgeInsets.only(left: 30),
                       child: Row(
                         children: [
                           Material(
@@ -65,19 +67,35 @@ class _HomePageState extends State<HomePage> {
                                 size: 30,
                                 color: Colors.black,
                               ),
+                              onPressed: () {
+                                print("previous music");
+                              },
                             ),
                           ),
                           Material(
                               child: IconButton(
-                            icon: new Icon(Icons.play_arrow,
-                                size: 30, color: Colors.black),
-                            onPressed: () {},
+                            onPressed: () {
+                              this.setState(() {
+                                isPlay = !isPlay;
+                              });
+                              if (isPlay) {
+                                _musicPlayerContainer.stopAnimation();
+                              } else {
+                                _musicPlayerContainer.startAnimation();
+                              }
+                            },
+                            icon: new Icon(
+                                isPlay ? Icons.stop : Icons.play_arrow,
+                                size: 30,
+                                color: Colors.black),
                           )),
                           Material(
                               child: IconButton(
                             icon: new Icon(Icons.skip_next,
                                 size: 30, color: Colors.black),
-                            onPressed: () {},
+                            onPressed: () {
+                              print("next music");
+                            },
                           )),
                         ],
                       ),
@@ -103,29 +121,65 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('AcGn Music +'),
-        ),
+            title: Container(
+          child: Column(
+            children: <Widget>[
+              Text('AcGn Music +'),
+            ],
+          ),
+        )),
         body: FutureBuilder(
           future: getHomePageContent(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              print("=======================================>builder" +
-                  snapshot.data.toString());
               var data = json.decode(snapshot.data.toString());
               List swiper = data['msgValue']['swiperDataList'];
               List navigatorList =
                   (data['msgValue']['topNaviDataList'] as List).cast();
-              String bannerPicUrl = (data['msgValue']['bannerPicUrl']);
               List myMusicList =
                   (data['msgValue']['myMusicList'] as List).cast();
-              return Column(
-                children: <Widget>[
-                  SwiperDiy(swiperDataList: swiper),
-                  TopNavigator(navigatorList: navigatorList),
-                  HomeBanner(),
-                  HomeMyMusicList(myMusicList: myMusicList),
-                  //HomeBanner(bannerPicUrl: bannerPicUrl,)
-                ],
+              return Container(
+                padding: EdgeInsets.only(bottom: 50),
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    // banner 部分
+                    SliverFixedExtentList(
+                      itemExtent: 100.0,
+                      delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                        return (SwiperDiy(swiperDataList: swiper));
+                      }, childCount: 1),
+                    ),
+                    // 中间用户部分
+                    SliverGrid(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 5,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                      ),
+                      delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                        return (gridListItem(index, navigatorList));
+                      }, childCount: navigatorList.length),
+                    ),
+                    // 我的歌单小widget，新增歌单用
+                    SliverFixedExtentList(
+                      itemExtent: 50.0,
+                      delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                        return (HomeBanner());
+                      }, childCount: 1),
+                    ),
+                    //歌单列表
+                    SliverFixedExtentList(
+                      itemExtent: 70.0,
+                      delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                        return (songListItem(context, index, myMusicList));
+                      }, childCount: myMusicList.length),
+                    ),
+                  ],
+                ),
               );
             } else {
               return Center(

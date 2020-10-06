@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
-//  TODO
-//  picture size should be a parameter
+
+//  转动的图片
 class MusicPlayerContainer extends StatefulWidget {
 
 
@@ -61,7 +61,7 @@ class MusicPlayerContainerState extends State<MusicPlayerContainer>
               // The state that has changed here is the animation object’s value.
             });
           });
-    _animationController.repeat();
+//    _animationController.repeat();
   }
 
   @override

@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'dart:async';
 import 'dart:io';
 import '../config/service_url.dart';
+import 'package:flutter/foundation.dart';
+import './service_mock.dart';
 
 //获取首页主题内容
 
-Future getHomePageContent() async {
+Future _getHomePageContent() async {
 
   try{
     print('开始获取首页数据....................');
@@ -30,7 +32,7 @@ Future getHomePageContent() async {
   }
 
 }
-Future getMusicListContent(var text) async{
+Future _getMusicListContent(var text) async{
 
   try{
     print('开始获取音乐数据....................');
@@ -51,6 +53,15 @@ Future getMusicListContent(var text) async{
     }
 
   }catch(e){
-    return print("ERROR:===============>${e}");
+    return print("ERROR:===============>$e");
   }
 }
+
+
+
+const getHomePageContent = kReleaseMode ? _getHomePageContent : getHomePageContentMock;
+
+const getMusicListContent = kReleaseMode ? _getMusicListContent : getMusicListContentMock;
+
+
+

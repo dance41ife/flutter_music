@@ -12,7 +12,6 @@ class MusicListWidget extends StatelessWidget {
     return InkWell(
         onTap: () {
           print("on pressed");
-          //Navigator.pushNamed(context, "/music_page",arguments: musicList[index]["list_name"].toString());
         },
         child: Container(
           decoration: BoxDecoration(
@@ -30,7 +29,7 @@ class MusicListWidget extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Text(
-                musicList[index].toString(),
+                musicList[index]['musicName'].toString(),
                 style: TextStyle(
                   fontSize: 25,
                 ),

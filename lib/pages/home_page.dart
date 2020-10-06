@@ -17,12 +17,12 @@ class _HomePageState extends State<HomePage> {
 
   OverlayEntry _overlayEntry;
   MusicPlayerContainer _musicPlayerContainer = new MusicPlayerContainer(20, 20);
-
+  bool _isPlay = false;
 
 
   OverlayEntry _createOverlayEntry() {
     return OverlayEntry(builder: (context) {
-      bool isPlay = false;
+
       double screenHeight = MediaQuery.of(context).size.height;
       double screenWidth = MediaQuery.of(context).size.width;
       return Positioned(
@@ -75,17 +75,18 @@ class _HomePageState extends State<HomePage> {
                           Material(
                               child: IconButton(
                             onPressed: () {
-                              this.setState(() {
-                                isPlay = !isPlay;
-                              });
-                              if (isPlay) {
+                                print(_isPlay);
+                              if (_isPlay) {
                                 _musicPlayerContainer.stopAnimation();
                               } else {
                                 _musicPlayerContainer.startAnimation();
                               }
+                              this.setState(() {
+                                _isPlay = !_isPlay;
+                              });
                             },
                             icon: new Icon(
-                                isPlay ? Icons.stop : Icons.play_arrow,
+                                _isPlay ? Icons.stop : Icons.play_arrow,
                                 size: 30,
                                 color: Colors.black),
                           )),
@@ -111,14 +112,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     getHomePageContent();
-    _overlayEntry = _createOverlayEntry();
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => Overlay.of(context).insert(_overlayEntry));
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    // setState 仅触发build，所以overlay必须在这里初始化以便于setState后重新构建overlay
+    // 否则overlay无法进行视图的更改
+    _overlayEntry = _createOverlayEntry();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => Overlay.of(context).insert(_overlayEntry));
     return Scaffold(
         appBar: AppBar(
             title: Container(

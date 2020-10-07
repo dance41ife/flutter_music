@@ -19,10 +19,8 @@ class _HomePageState extends State<HomePage> {
   MusicPlayerContainer _musicPlayerContainer = new MusicPlayerContainer(20, 20);
   bool _isPlay = false;
 
-
   OverlayEntry _createOverlayEntry() {
     return OverlayEntry(builder: (context) {
-
       double screenHeight = MediaQuery.of(context).size.height;
       double screenWidth = MediaQuery.of(context).size.width;
       return Positioned(
@@ -75,7 +73,6 @@ class _HomePageState extends State<HomePage> {
                           Material(
                               child: IconButton(
                             onPressed: () {
-                                print(_isPlay);
                               if (_isPlay) {
                                 _musicPlayerContainer.stopAnimation();
                               } else {
@@ -120,15 +117,23 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // setState 仅触发build，所以overlay必须在这里初始化以便于setState后重新构建overlay
     // 否则overlay无法进行视图的更改
+    // 注意由于每次触发build都会重新构建overlay因此有些组件状态不是连续的
     _overlayEntry = _createOverlayEntry();
     WidgetsBinding.instance
         .addPostFrameCallback((_) => Overlay.of(context).insert(_overlayEntry));
     return Scaffold(
         appBar: AppBar(
             title: Container(
-          child: Column(
+          child: Row(
             children: <Widget>[
               Text('AcGn Music +'),
+              IconButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, "/search",);
+                },
+                padding: EdgeInsets.only(left: 200),
+                icon: new Icon(Icons.search, size: 30, color: Colors.white),
+              ),
             ],
           ),
         )),

@@ -1,10 +1,10 @@
-class MusicListContent {
+class MusicList {
   int statusCode;
   MsgValue msgValue;
 
-  MusicListContent({this.statusCode, this.msgValue});
+  MusicList({this.statusCode, this.msgValue});
 
-  MusicListContent.fromJson(Map<String, dynamic> json) {
+  MusicList.fromJson(Map<String, dynamic> json) {
     statusCode = json['statusCode'];
     msgValue = json['msgValue'] != null
         ? new MsgValue.fromJson(json['msgValue'])
@@ -22,15 +22,15 @@ class MusicListContent {
 }
 
 class MsgValue {
-  List<MusicList> musicList;
+  List<MusicListItem> musicList;
 
   MsgValue({this.musicList});
 
   MsgValue.fromJson(Map<String, dynamic> json) {
     if (json['musicList'] != null) {
-      musicList = new List<MusicList>();
+      musicList = new List<MusicListItem>();
       json['musicList'].forEach((v) {
-        musicList.add(new MusicList.fromJson(v));
+        musicList.add(new MusicListItem.fromJson(v));
       });
     }
   }
@@ -44,13 +44,13 @@ class MsgValue {
   }
 }
 
-class MusicList {
+class MusicListItem {
   String musicName;
   String musicUrl;
 
-  MusicList({this.musicName, this.musicUrl});
+  MusicListItem({this.musicName, this.musicUrl});
 
-  MusicList.fromJson(Map<String, dynamic> json) {
+  MusicListItem.fromJson(Map<String, dynamic> json) {
     musicName = json['musicName'];
     musicUrl = json['musicUrl'];
   }

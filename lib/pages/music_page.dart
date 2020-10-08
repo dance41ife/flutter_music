@@ -26,7 +26,7 @@ class MusicPage extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
 
-                var data = MusicListContent.fromJson(json.decode(snapshot.data.toString()));
+                var data = MusicList.fromJson(json.decode(snapshot.data.toString()));
                 var list = data.msgValue.musicList;
 
                 return Container(

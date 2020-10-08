@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/entity/music_list_structure.dart';
 
 class MusicListWidget extends StatelessWidget {
-  final List<MusicList> musicList;
+  final List<MusicListItem> musicList;
 
   MusicListWidget({Key key, this.musicList}) : super(key: key);
 

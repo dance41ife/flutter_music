@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/utils/share_preferences_util.dart';
 import 'package:flutter_shop/widget/search/search_history_item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,10 +17,6 @@ class _SearchPageState extends State<SearchPage> {
 
   List<String> searchHistory = [];
 
-  Future<SharedPreferences> getPrefs() async {
-    SharedPreferences instance = await SharedPreferences.getInstance();
-    return instance;
-  }
 
   @override
   Widget build(BuildContext context) {

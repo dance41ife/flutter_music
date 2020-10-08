@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'dart:async';
 import 'dart:io';
-import '../config/service_url.dart';
+import '../../config/service_url.dart';
 import 'package:flutter/foundation.dart';
-import './service_mock.dart';
+import 'service_mock.dart';
 
 //获取首页主题内容
 

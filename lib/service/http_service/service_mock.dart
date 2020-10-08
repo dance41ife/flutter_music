@@ -4,7 +4,7 @@ const HomePageContentJsonResult = '''
  {
     "statusCode": 200,
     "msgValue": {
-        "bannerPicUrl": "http://123.207.87.254:3999/uploads/2020-10-06/0036c7c0.jpg",
+        
         "swiperDataList": [
             "http://123.207.87.254:3999/uploads/2020-10-06/9f0e0a81.jpg",
             "http://123.207.87.254:3999/uploads/2020-10-06/05437476.jpg",
@@ -87,7 +87,7 @@ const HomePageContentJsonResult = '''
 }
 ''';
 
-const MockMusicUrl = "https://freetyst.nf.migu.cn/public/product9th/product41/2020/08/1013/2009%E5%B9%B406%E6%9C%8826%E6%97%A5%E5%8D%9A%E5%B0%94%E6%99%AE%E6%96%AF/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60054701921134458.mp3?key=e76e09da033d92bd&Tim=1601986771151&channelid=00&msisdn=f8ed6afd6c0b432f84f422fb32b35760&CI=600547019212600902000006889374&F=000009";
+const MockMusicUrl = "http://freetyst.nf.migu.cn/public/product9th/product41/2020/08/1013/2009%E5%B9%B406%E6%9C%8826%E6%97%A5%E5%8D%9A%E5%B0%94%E6%99%AE%E6%96%AF/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60054701921134458.mp3?key=e76e09da033d92bd&Tim=1601986771151&channelid=00&msisdn=f8ed6afd6c0b432f84f422fb32b35760&CI=600547019212600902000006889374&F=000009";
 
 Future getHomePageContentMock() async {
   return HomePageContentJsonResult;

@@ -1,12 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_shop/widget/home/SwiperDiy.dart';
+import 'package:flutter_shop/entity/home_data_struc.dart';
+import 'package:flutter_shop/service/http_service/service_mock.dart';
+import 'package:flutter_shop/service/play_service/player_service.dart';
+import 'package:flutter_shop/widget/home/swiper_widget.dart';
 import 'package:flutter_shop/widget/music/song_list_item.dart';
 import 'package:flutter_shop/widget/music/user_grid_item.dart';
-import '../widget/home/HomeBanner.dart';
 import 'dart:convert';
-import '../service/service_method.dart';
-import '../widget/music_anime/musicPlayerContainer.dart';
-
+import '../service/http_service/service_method.dart';
+import '../widget/music_anime/music_player_container.dart';
+import 'package:audioplayers/audioplayers.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,6 +21,8 @@ class _HomePageState extends State<HomePage> {
   OverlayEntry _overlayEntry;
   MusicPlayerContainer _musicPlayerContainer = new MusicPlayerContainer(20, 20);
   bool _isPlay = false;
+
+  AudioPlayer player;
 
   OverlayEntry _createOverlayEntry() {
     return OverlayEntry(builder: (context) {
@@ -75,8 +80,10 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               if (_isPlay) {
                                 _musicPlayerContainer.stopAnimation();
+                                player.pause();
                               } else {
                                 _musicPlayerContainer.startAnimation();
+                                player.play(MockMusicUrl);
                               }
                               this.setState(() {
                                 _isPlay = !_isPlay;
@@ -109,8 +116,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     getHomePageContent();
-
+    player = Player.instance.player;
     super.initState();
+
   }
 
   @override
@@ -128,8 +136,11 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Text('AcGn Music +'),
               IconButton(
-                onPressed: (){
-                  Navigator.pushNamed(context, "/search",);
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    "/search",
+                  );
                 },
                 padding: EdgeInsets.only(left: 200),
                 icon: new Icon(Icons.search, size: 30, color: Colors.white),
@@ -141,12 +152,11 @@ class _HomePageState extends State<HomePage> {
           future: getHomePageContent(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              var data = json.decode(snapshot.data.toString());
-              List swiper = data['msgValue']['swiperDataList'];
-              List navigatorList =
-                  (data['msgValue']['topNaviDataList'] as List).cast();
-              List myMusicList =
-                  (data['msgValue']['myMusicList'] as List).cast();
+              var data =
+              HomeDataStructure.fromJson(json.decode(snapshot.data.toString()));
+              List swiper = data.msgValue.swiperDataList;
+              List<TopNaviDataList> navigatorList = data.msgValue.topNaviDataList.cast();
+              List<MyMusicList> myMusicList = data.msgValue.myMusicList.cast();
               return Container(
                 padding: EdgeInsets.only(bottom: 50),
                 child: CustomScrollView(
@@ -176,7 +186,14 @@ class _HomePageState extends State<HomePage> {
                       itemExtent: 50.0,
                       delegate: SliverChildBuilderDelegate(
                           (BuildContext context, int index) {
-                        return (HomeBanner());
+                        return Container(
+                            padding: EdgeInsets.all(5.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text("我的歌单"),
+                                Icon(CupertinoIcons.add)
+                              ],
+                            ));
                       }, childCount: 1),
                     ),
                     //歌单列表

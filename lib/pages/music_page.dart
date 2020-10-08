@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_shop/service/service_method.dart';
-import 'package:flutter_shop/widget/music/musicListWidget.dart';
+import '../service/http_service/service_method.dart';
+import 'package:flutter_shop/widget/music/music_list_widget.dart';
 
 class MusicPage extends StatelessWidget {
   @override

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/config/service_url.dart';
-import 'package:flutter_shop/widget/music_Anime/musicPlayerContainer.dart';
+import 'package:flutter_shop/widget/music_Anime/music_player_container.dart';
 class PlayingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

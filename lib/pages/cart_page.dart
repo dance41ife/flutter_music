@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_shop/widget/music/PlayingWidget.dart';
+import 'package:flutter_shop/widget/music/playing_widget.dart';
 class CartPage extends StatefulWidget {
   @override
   _CartPage createState() => _CartPage();

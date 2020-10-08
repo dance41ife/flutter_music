@@ -1,8 +1,10 @@
+import 'package:flutter_shop/entity/music_list_structure.dart';
+
 class PlayListService{
-  var _playList = [];
+  List<MusicList> _playList = [];
 
 
-  void addToPlayList(item){
+  void addToPlayList(MusicList item){
     _playList.add(item);
   }
 
@@ -10,7 +12,7 @@ class PlayListService{
     return _playList;
   }
 
-  void replacePlayList(List list){
+  void replacePlayList(List<MusicList> list){
     _playList = list;
   }
 }

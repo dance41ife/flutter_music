@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/entity/music_list_structure.dart';
 import '../service/http_service/service_method.dart';
 import 'package:flutter_shop/widget/music/music_list_widget.dart';
 
@@ -24,8 +25,9 @@ class MusicPage extends StatelessWidget {
             future: getMusicListContent(postParam),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                var data = json.decode(snapshot.data.toString());
-                var list = (data['msgValue']['musicList'] as List).cast();
+
+                var data = MusicListContent.fromJson(json.decode(snapshot.data.toString()));
+                var list = data.msgValue.musicList;
 
                 return Container(
                   padding: EdgeInsets.only(bottom: 50),

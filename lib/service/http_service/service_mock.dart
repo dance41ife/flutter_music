@@ -100,7 +100,7 @@ Future getMusicListContentMock(var text) async {
     "msgValue": {
         "musicList": [
             {
-                "musicName": "$text(0)",
+                "musicName": "早 安 ！ 地 球 ！",
                 "musicUrl":"$MockMusicUrl"
             },
             {

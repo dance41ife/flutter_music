@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/entity/music_list_structure.dart';
 
 class MusicListWidget extends StatelessWidget {
-  final List musicList;
+  final List<MusicList> musicList;
 
   MusicListWidget({Key key, this.musicList}) : super(key: key);
 
@@ -29,7 +30,7 @@ class MusicListWidget extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Text(
-                musicList[index]['musicName'].toString(),
+                musicList[index].musicName.toString(),
                 style: TextStyle(
                   fontSize: 25,
                 ),

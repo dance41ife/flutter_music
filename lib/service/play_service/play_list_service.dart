@@ -1,4 +1,5 @@
 import 'package:flutter_shop/entity/music_list_structure.dart';
+import 'package:flutter_shop/utils/share_preferences_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PlayListService{
@@ -13,8 +14,10 @@ class PlayListService{
   // 工厂模式
   factory PlayListService() =>_getInstance();
   static PlayListService get instance => _getInstance();
-  get playList => this._playList;
+  List<MusicListItem> get playList => this._playList;
   static PlayListService _instance;
+
+  SharedPreferences spf;
 
   PlayListService._internal() {
     // 初始化

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/config/share_preferences_keys.dart';
 import 'package:flutter_shop/utils/share_preferences_util.dart';
 import 'package:flutter_shop/widget/search/search_history_item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +26,7 @@ class _SearchPageState extends State<SearchPage> {
       builder: (context, result) {
         if (result.hasData) {
           SharedPreferences prefs = result.data;
-          var temp = prefs.getStringList("search_history");
+          List<String> temp = prefs.getStringList(enumConvert2String(share_preferences_key.SearchHistory));
           searchHistory = temp == null ? searchHistory : temp;
           return Scaffold(
             backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
@@ -55,7 +56,7 @@ class _SearchPageState extends State<SearchPage> {
                                 print('asdf$value');
                                 searchHistory.add(value);
                                 await prefs.setStringList(
-                                    "search_history", searchHistory);
+                                    enumConvert2String(share_preferences_key.SearchHistory), searchHistory);
                                 print('add $value finished');
 
                               },

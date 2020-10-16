@@ -78,6 +78,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.10"
+  enum_to_string:
+    dependency: "direct main"
+    description:
+      name: enum_to_string
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.13"
   ffi:
     dependency: transitive
     description:

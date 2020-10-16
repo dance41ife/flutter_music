@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/entity/home_data_struc.dart';
+import 'package:flutter_shop/entity/music_list_structure.dart';
 import 'package:flutter_shop/service/http_service/service_mock.dart';
 import 'package:flutter_shop/service/play_service/play_list_service.dart';
 import 'package:flutter_shop/service/play_service/player_service.dart';
@@ -27,8 +28,7 @@ class _HomePageState extends State<HomePage> {
   bool _isPlay = false;
 
   AudioPlayer player;
-  PlayListService playList;
-
+  List<MusicListItem> playList;
   OverlayEntry _createOverlayEntry() {
     return OverlayEntry(builder: (context) {
       double screenHeight = MediaQuery.of(context).size.height;
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context, result) {
           if (result.hasData){
             SharedPreferences prefs = result.data;
-            var temp = prefs.getStringList("curr");
+            var temp = prefs.getStringList("curr_music");
           }
           return Positioned(
             left: 0,
@@ -95,7 +95,9 @@ class _HomePageState extends State<HomePage> {
                                     player.pause();
                                   } else {
                                     //_musicPlayerContainer.startAnimation();
+                                    print("ready play "+MockMusicUrl);
                                     player.play(MockMusicUrl);
+                                    //
                                   }
                                   this.setState(() {
                                     _isPlay = !_isPlay;

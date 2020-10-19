@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_shop/entity/music_list_structure.dart';
 import 'package:flutter_shop/utils/share_preferences_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PlayListService{
+class PlayListModel with ChangeNotifier{
+
   List<MusicListItem> _playList;
   int currIndex;
 
@@ -10,7 +12,7 @@ class PlayListService{
     _playList.add(item);
   }
 
-  MusicListItem replacePlayList(List<MusicListItem> list,int index){
+  MusicListItem setPlayList(List<MusicListItem> list,int index){
     _playList = list;
     currIndex = index;
     return _playList.elementAt(index);

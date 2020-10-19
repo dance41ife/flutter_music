@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/entity/music_list_structure.dart';
+import 'package:flutter_shop/widget/music/bottom_play_widget.dart';
 import '../service/http_service/service_method.dart';
 import 'package:flutter_shop/widget/music/music_list_widget.dart';
 
@@ -12,8 +13,6 @@ class MusicPage extends StatelessWidget {
         .of(context)
         .settings
         .arguments;
-
-
     return Scaffold(
       backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
       appBar: AppBar(
@@ -30,10 +29,10 @@ class MusicPage extends StatelessWidget {
                 var list = data.msgValue.musicList;
 
                 return Container(
-                  padding: EdgeInsets.only(bottom: 50),
                   child: Column(
                     children: <Widget>[
                       MusicListWidget(musicList: list),
+                      BottomPlayWidget()
                     ],
                   ),
                 );

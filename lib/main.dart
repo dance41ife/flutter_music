@@ -2,9 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/pages/index_page.dart';
 import 'package:flutter_shop/pages/music_page.dart';
 import 'package:flutter_shop/pages/search_page.dart';
+import 'package:flutter_shop/provider/play_list_model.dart';
+import 'package:flutter_shop/provider/play_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<PlaySongsModel>(
+          create: (_)=>PlaySongsModel(),
+        )
+      ],
+      child: MyApp(),
+    )
+
+  );
 }
 
 class MyApp extends StatelessWidget {

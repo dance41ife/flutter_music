@@ -100,12 +100,12 @@ Future getMusicListContentMock(var text) async {
     "msgValue": {
         "musicList": [
             {
-                "musicName": "早 安 ！ 地 球 ！",
-                "musicUrl":"$MockMusicUrl"
+                "musicName": "心墙",
+                "musicUrl":"https://freetyst.nf.migu.cn/public/product08/2018/03/05/2013%E5%B9%B49%E6%9C%8823%E6%97%A5%E7%B4%A7%E6%80%A5%E5%87%86%E5%85%A5%E9%BD%90%E5%8A%9B%E9%9F%B3%E4%B9%9023%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/%E5%BF%83%E5%A2%99(%E7%94%B5%E8%A7%86%E5%89%A7%E6%B5%81%E6%98%9F%E8%8A%B1%E5%9B%AD%E7%89%87%E5%B0%BE%E6%9B%B2)-%E9%83%AD%E9%9D%99.mp3?key=757f9c0039bf684e&Tim=1603794541628&channelid=00&msisdn=0d2e44ee3baa4dc49f8fcc6a6089eeca&CI=600836110782600907000001606359&F=000009"
             },
             {
-                "musicName": "$text(1)",
-                "musicUrl":"$MockMusicUrl"
+                "musicName": "Hey Jude",
+                "musicUrl":"https://s128.xiami.net/169/7169/374967/1769446601_1183058_l.mp3?ccode=xiami__&expire=86400&duration=278&psid=6a94e35a3c01a9f27f5652a7e19855ad&ups_client_netip=null&ups_ts=1605944398&ups_userid=0&utid=&vid=1769446601&fn=1769446601_1183058_l.mp3&vkey=B2d4a612a9a8aa2e198bb883a90cab8b9"
             },
             {
                 "musicName": "$text(2)",

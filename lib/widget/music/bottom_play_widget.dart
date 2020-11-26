@@ -6,6 +6,9 @@ import 'package:flutter_shop/service/http_service/service_mock.dart';
 import 'package:flutter_shop/widget/music_anime/music_player_container.dart';
 import 'package:provider/provider.dart';
 class BottomPlayWidget extends StatefulWidget {
+  final PlaySongsModel model;
+  BottomPlayWidget({Key key, this.model}) : super(key: key);
+
   @override
   _BottomPlayWidgetState createState() => _BottomPlayWidgetState();
 }
@@ -19,8 +22,6 @@ class _BottomPlayWidgetState extends State<BottomPlayWidget> {
     double screenWidth = MediaQuery.of(context).size.width;
     MusicPlayerContainer _musicPlayerContainer = new MusicPlayerContainer(20, 20);
 
-
-    return Consumer<PlaySongsModel>(builder: (context,model,child){
       return  Align(
         alignment: Alignment.bottomCenter,
         child: Opacity(
@@ -64,6 +65,7 @@ class _BottomPlayWidgetState extends State<BottomPlayWidget> {
                               ),
                               onPressed: () {
                                 print("previous music");
+                                widget.model.prePlay();
                               },
                             ),
                           ),
@@ -72,13 +74,15 @@ class _BottomPlayWidgetState extends State<BottomPlayWidget> {
                                 onPressed: () {
                                   MusicListItem item = new MusicListItem();
                                   item.musicUrl = MockMusicUrl;
-                                  model.playSong(item);
+
                                   this.setState(() {
-                                    model.isPlay = !model.isPlay;
+                                    widget.model.isPlay = !widget.model.isPlay;
                                   });
+
+                                  widget.model.isPlay ? widget.model.play() : widget.model.pausePlay();
                                 },
                                 icon: new Icon(
-                                    model.isPlay ? Icons.stop : Icons.play_arrow,
+                                    widget.model.isPlay ? Icons.stop : Icons.play_arrow,
                                     size: 30,
                                     color: Colors.black),
                               )),
@@ -88,6 +92,7 @@ class _BottomPlayWidgetState extends State<BottomPlayWidget> {
                                     size: 30, color: Colors.black),
                                 onPressed: () {
                                   print("next music");
+                                  widget.model.nextPlay();
                                 },
                               )),
                         ],
@@ -100,7 +105,7 @@ class _BottomPlayWidgetState extends State<BottomPlayWidget> {
 
 
       );
-    });
+
 
   }
 }

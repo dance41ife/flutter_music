@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/entity/music_list_structure.dart';
 
 class PlaySongsModel with ChangeNotifier{
+
   AudioPlayer _audioPlayer = AudioPlayer();
+
   List<MusicListItem> _songs = [];
   int curIndex = 0;
   Duration curSongDuration;
@@ -14,9 +16,11 @@ class PlaySongsModel with ChangeNotifier{
   List<MusicListItem> get allSongs => _songs;
   MusicListItem get curSong => _songs[curIndex];
 
-  bool  get  isPlay => _isPlay;
+  bool get  isPlay => _isPlay;
 
   set isPlay(bool) => _isPlay = bool;
+
+
 
   // 播放一首歌
   void playSong(MusicListItem song) {
@@ -24,7 +28,12 @@ class PlaySongsModel with ChangeNotifier{
     play();
   }
 
+  void playSongInList(List<MusicListItem> songs,int index){
+    _songs = songs;
+    curIndex = index;
 
+    play();
+  }
 
   // 添加歌曲
   void addSongs(List<MusicListItem> songs) {

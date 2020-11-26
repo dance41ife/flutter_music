@@ -52,7 +52,6 @@ class _SearchPageState extends State<SearchPage> {
                               onFieldSubmitted: (value) async {
                                 //  TODO
                                 // here should to be net work api call
-
                                 print('asdf$value');
                                 searchHistory.add(value);
                                 await prefs.setStringList(

@@ -25,7 +25,7 @@ class PlaySongsModel with ChangeNotifier{
     _audioPlayer.setReleaseMode(ReleaseMode.STOP);
     // 播放状态监听
     _audioPlayer.onPlayerStateChanged.listen((state) {
-      /// 先做顺序播放
+      // 先做顺序播放
       if(state == AudioPlayerState.COMPLETED){
         nextPlay();
       }

@@ -28,132 +28,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String homePageContent = "正在获取数据";
 
-  //OverlayEntry _overlayEntry;
-//  MusicPlayerContainer _musicPlayerContainer = new MusicPlayerContainer(20, 20);
-//  bool _isPlay = false;
-
-  //AudioPlayer player;
-  //List<MusicListItem> playList;
-//  OverlayEntry _createOverlayEntry() {
-//    return OverlayEntry(builder: (context) {
-//      double screenHeight = MediaQuery.of(context).size.height;
-//      double screenWidth = MediaQuery.of(context).size.width;
-//      return FutureBuilder(
-//        future: getPrefs(),
-//        builder: (context, result) {
-//          if (result.hasData){
-//            SharedPreferences prefs = result.data;
-//            var temp = prefs.getStringList("curr_music");
-//          }
-//          return Positioned(
-//            left: 0,
-//            top: screenHeight - 50,
-//            child: Opacity(
-//              opacity: 1,
-//              child: Container(
-//                  color: Colors.white,
-//                  child: Container(
-//                    height: 50,
-//                    width: screenWidth,
-//                    padding: EdgeInsets.only(top: 7, left: 7),
-//                    child: Row(
-//                      children: <Widget>[
-//                        Column(
-//                          children: [_musicPlayerContainer],
-//                        ),
-//                        Container(
-//                          child: Column(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              Row(
-//                                children: [
-//                                  Text(
-//                                    'should be music name',
-//                                    style: TextStyle(fontSize: 12),
-//                                  ),
-//                                ],
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                        Container(
-//                          padding: EdgeInsets.only(left: 30),
-//                          child: Row(
-//                            children: [
-//                              Material(
-//                                child: IconButton(
-//                                  icon: new Icon(
-//                                    Icons.skip_previous,
-//                                    size: 30,
-//                                    color: Colors.black,
-//                                  ),
-//                                  onPressed: () {
-//                                    print("previous music");
-//                                  },
-//                                ),
-//                              ),
-//                              Material(
-//                                  child: IconButton(
-//                                onPressed: () {
-//                                  if (_isPlay) {
-//                                    //_musicPlayerContainer.stopAnimation();
-//                                    player.pause();
-//                                  } else {
-//                                    //_musicPlayerContainer.startAnimation();
-//                                    print("ready play "+MockMusicUrl);
-//                                    player.play(MockMusicUrl);
-//                                    //
-//                                  }
-//                                  this.setState(() {
-//                                    _isPlay = !_isPlay;
-//                                  });
-//                                },
-//                                icon: new Icon(
-//                                    _isPlay ? Icons.stop : Icons.play_arrow,
-//                                    size: 30,
-//                                    color: Colors.black),
-//                              )),
-//                              Material(
-//                                  child: IconButton(
-//                                icon: new Icon(Icons.skip_next,
-//                                    size: 30, color: Colors.black),
-//                                onPressed: () {
-//                                  print("next music");
-//                                },
-//                              )),
-//                            ],
-//                          ),
-//                        )
-//                      ],
-//                    ),
-//                  )),
-//            ),
-//          );
-//        },
-//      );
-//    });
-//  }
-
   @override
   void initState() {
     getHomePageContent();
-//    player = Player.instance.player;
-//    playList = PlayListService.instance.playList;
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // setState 仅触发build，所以overlay必须在这里初始化以便于setState后重新构建overlay
-    // 否则overlay无法进行视图的更改
-    // 注意由于每次触发build都会重新构建overlay因此有些组件状态不是连续的
-
-//    _overlayEntry = _createOverlayEntry();
-//    WidgetsBinding.instance
-//        .addPostFrameCallback((_) => Overlay.of(context).insert(_overlayEntry));
-
-
     return  Consumer<PlaySongsModel>(builder: (context,model,child)
     {
       return Scaffold(

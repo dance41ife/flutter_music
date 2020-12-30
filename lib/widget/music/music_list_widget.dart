@@ -13,13 +13,13 @@ class MusicListWidget extends StatelessWidget {
     print("===============================>musicList:index->" +
         index.toString() +
         ",${musicList[index].toString()}");
-
     return Consumer<PlaySongsModel>(builder: (context,model,child){
+      print("MusicListWidget----------------------->");
+      print(model);
       return  InkWell(
           onTap: () {
             model.playSongInList(musicList,index);
-            print("===============================>musicList:index->" );
-
+            print("===============================>musicList:index->" + index.toString());
           },
           child: Container(
             decoration: BoxDecoration(

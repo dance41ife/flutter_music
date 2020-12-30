@@ -29,10 +29,12 @@ class PlaySongsModel with ChangeNotifier{
   }
 
   void playSongInList(List<MusicListItem> songs,int index){
+    _isPlay =! _isPlay;
     _songs = songs;
     curIndex = index;
 
     play();
+    notifyListeners();
   }
 
   // 添加歌曲
@@ -43,6 +45,7 @@ class PlaySongsModel with ChangeNotifier{
   /// 播放
   void play() {
     var url = this._songs[curIndex].musicUrl;
+    print("===============================>now playing "+url);
     _audioPlayer.play(url);
     saveCurSong();
   }

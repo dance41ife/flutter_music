@@ -14,6 +14,13 @@ class BottomPlayWidget extends StatefulWidget {
 }
 
 class _BottomPlayWidgetState extends State<BottomPlayWidget> {
+  PlaySongsModel _playSongsModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +29,7 @@ class _BottomPlayWidgetState extends State<BottomPlayWidget> {
     double screenWidth = MediaQuery.of(context).size.width;
     MusicPlayerContainer _musicPlayerContainer = new MusicPlayerContainer(20, 20);
 
+    print(widget.model.isPlay);
       return  Align(
         alignment: Alignment.bottomCenter,
         child: Opacity(

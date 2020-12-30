@@ -10,7 +10,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<PlaySongsModel>(
-          create: (_)=>PlaySongsModel(),
+          create: (_)=>PlaySongsModel()..init(),
         )
       ],
       child: MyApp(),

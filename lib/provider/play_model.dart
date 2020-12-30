@@ -7,7 +7,7 @@ class PlaySongsModel with ChangeNotifier{
 
   AudioPlayer _audioPlayer = AudioPlayer();
 
-  List<MusicListItem> _songs = [];
+  List<MusicListItem> _songs = [MusicListItem.getOne()];
   int curIndex = 0;
   Duration curSongDuration;
 
@@ -21,6 +21,19 @@ class PlaySongsModel with ChangeNotifier{
   set isPlay(bool) => _isPlay = bool;
 
 
+  void init() {
+    _audioPlayer.setReleaseMode(ReleaseMode.STOP);
+    // 播放状态监听
+    _audioPlayer.onPlayerStateChanged.listen((state) {
+      /// 先做顺序播放
+      if(state == AudioPlayerState.COMPLETED){
+        nextPlay();
+      }
+      // 其实也只有在播放状态更新时才需要通知。
+      notifyListeners();
+    });
+
+  }
 
   // 播放一首歌
   void playSong(MusicListItem song) {
@@ -29,7 +42,8 @@ class PlaySongsModel with ChangeNotifier{
   }
 
   void playSongInList(List<MusicListItem> songs,int index){
-    _isPlay =! _isPlay;
+    _isPlay ? _isPlay = _isPlay : _isPlay = !_isPlay;
+    //_isPlay =! _isPlay;
     _songs = songs;
     curIndex = index;
 
@@ -90,4 +104,6 @@ class PlaySongsModel with ChangeNotifier{
     super.dispose();
     _audioPlayer.release();
   }
+
+
 }

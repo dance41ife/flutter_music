@@ -52,7 +52,7 @@ class _BottomPlayWidgetState extends State<BottomPlayWidget> {
                           Row(
                             children: [
                               Text(
-                                'should be music name',
+                                widget.model.curSong.musicName.toString(),
                                 style: TextStyle(fontSize: 12),
                               ),
                             ],

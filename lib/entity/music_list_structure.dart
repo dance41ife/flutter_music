@@ -61,4 +61,11 @@ class MusicListItem {
     data['musicUrl'] = this.musicUrl;
     return data;
   }
+
+  static MusicListItem getOne(){
+    MusicListItem musicListItem = new MusicListItem();
+    musicListItem.musicName = "init";
+    musicListItem.musicUrl = "";
+    return musicListItem;
+  }
 }
